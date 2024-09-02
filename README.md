@@ -114,8 +114,8 @@ Com essas ferramentas instaladas, você estará pronto para seguir com a instala
 
 1. Clone o repositório
    ```sh
-   git clone https://github.com/your_username/repo_name.git
-   cd repo_name
+   git clone https://github.com/EduardoMarques-Dev/viceri-seidor
+   cd viceri-seidor
    ```
 2. Instale as dependências do backend
    ```sh
