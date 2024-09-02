@@ -1,7 +1,6 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { version } from 'winston';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -10,7 +9,7 @@ async function bootstrap() {
   // Habilita o CORS para todas as origens
   app.enableCors();
 
-  //  VALIDATION
+  // Validação global
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -19,7 +18,7 @@ async function bootstrap() {
     }),
   );
 
-  // SWAGGER
+  // Configuração do Swagger
   const document = getSwagger(app);
   SwaggerModule.setup('api-docs', app, document);
 
@@ -27,19 +26,21 @@ async function bootstrap() {
 }
 bootstrap();
 
-function getSwagger(app: INestApplication<any>) {
-  const config = getSwaggerConfig(version);
+function getSwagger(app: INestApplication) {
+  const config = getSwaggerConfig(process.env.VERSION || '1.0.0');
   const document = SwaggerModule.createDocument(app, config);
 
   document.info = {
     ...document.info,
-    description: `${document.info.description}\nEnviroment: ${process.env.ENVIROMENT}`,
+    description: `${document.info.description}\nEnvironment: ${
+      process.env.ENVIROMENT || 'development'
+    }`,
   };
 
   return document;
 }
 
-function getSwaggerConfig(version) {
+function getSwaggerConfig(version: string) {
   const config = new DocumentBuilder()
     .setTitle('Viceri Seidor API')
     .setDescription(getDescription())
@@ -53,5 +54,5 @@ function getSwaggerConfig(version) {
 }
 
 function getDescription() {
-  return `aaaaa`;
+  return `Esta é a API da Viceri Seidor, usada para gerenciar tarefas e autenticação.`;
 }
