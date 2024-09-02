@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model test_user {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  email    String     @unique
+  name     String     @default("")
+  password String
+  roles    RoleType[]
+
+  tasks test_task[]
+}
+
+model test_task {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  user_id     String       @db.ObjectId
+  description String
+  status      StatusType   @default(PENDENT)
+  priority    PriorityType @default(LOW)
+
+  user test_user @relation(fields: [user_id], references: [id])
+}
+
+model test_reset_token {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id     String   @db.ObjectId
+  token       String
+  expiry_date DateTime
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+enum RoleType {
+  USER
+  ADMIN
+}
+
+enum PriorityType {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum StatusType {
+  COMPLETED
+  PENDENT
+}

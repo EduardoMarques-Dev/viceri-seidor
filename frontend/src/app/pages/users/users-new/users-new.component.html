@@ -1,0 +1,32 @@
+<div class="container">
+    <form [formGroup]="formUser" (ngSubmit)="saveNewUser()">
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" class="form-control" formControlName="name">
+            <div class="form-text text-danger" *ngIf="isFormControlInvalid('name')">
+                O nome é obrigatório, e deve ter no mínimo 4 caracteres!
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="temail" class="form-control" formControlName="email">
+            <div class="form-text text-danger" *ngIf="isFormControlInvalid('email')">
+                O email deve ser válido!
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Senha</label>
+            <input type="password" class="form-control" formControlName="password">
+            <div class="form-text text-danger" *ngIf="isFormControlInvalid('password')">
+                A senha deve ter pelo menos 4 caracteres, no máximo 20 caracteres, um caractere especial, uma letra
+                maiúscula, uma letra minúscula, e não deve conter espaços.
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Salvar</button>
+        </div>
+    </form>
+</div>

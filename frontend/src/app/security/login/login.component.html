@@ -1,0 +1,53 @@
+<div class="container d-flex justify-content-center">
+    <div class="col-4">
+        <div class="card shadow round mt-5">
+            <div class="card-header">
+                <h3 class="text-center">Login</h3>
+            </div>
+
+            <div class="card-body">
+                <form [formGroup]="formLogin">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" formControlName="email" />
+                        <div class="form-text text-danger" *ngIf="isFormControlInvalid('email')">
+                            O email deve ser válido.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Senha</label>
+                        <input type="password" class="form-control" formControlName="password" />
+                        <div class="form-text text-danger" *ngIf="isFormControlInvalid('password')">
+                            A senha deve conter pelo menos 6 caracteres.
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-primary" [disabled]="!formLogin.valid"
+                            (click)="submitForm()">
+                            Entrar
+                        </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#addNewUserModal">
+                            Registrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addNewUserModal" tabindex="-1" aria-labelledby="addNewUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewUserModalLabel">Adicionar Novo Usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-users-new (newUser)="onUserCreated($event)"></app-users-new>
+            </div>
+        </div>
+    </div>
+</div>

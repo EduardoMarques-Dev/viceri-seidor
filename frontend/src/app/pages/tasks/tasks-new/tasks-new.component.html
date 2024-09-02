@@ -1,0 +1,29 @@
+<div class="container">
+    <form [formGroup]="formTask" (ngSubmit)="saveNewTask()">
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" formControlName="description">
+            <div class="form-text text-danger" *ngIf="isFormControlInvalid('description')">
+                A descrição é obrigatória, e deve ter no mínimo 3 caracteres!
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Prioridade</label>
+            <select class="form-control" formControlName="priority">
+                <option value="" disabled selected>Selecione a prioridade</option>
+                <option value="Alta">Alta</option>
+                <option value="Media">Média</option>
+                <option value="Baixa">Baixa</option>
+            </select>
+            <div class="form-text text-danger" *ngIf="isFormControlInvalid('priority')">
+                A prioridade é obrigatória!
+            </div>
+        </div>
+
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Salvar</button>
+        </div>
+    </form>
+</div>
