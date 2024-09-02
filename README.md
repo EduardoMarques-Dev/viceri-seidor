@@ -182,6 +182,39 @@ Também é possível utilizar a coleção do Postman que está na raiz do reposi
 
 <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 
+<!-- AWS -->
+
+### Deploy na AWS
+
+Para disponibilizar esta aplicação na AWS utilizando a versão gratuita, siga os passos abaixo:
+
+1. **Backend**:
+
+   - Utilize **AWS Elastic Beanstalk** para fazer o deploy do backend:
+     1. Crie um ambiente no Elastic Beanstalk.
+     2. Configure as variáveis de ambiente, como as chaves de acesso ao MongoDB.
+     3. Faça o upload do código e inicie o ambiente.
+   - Configure o banco de dados utilizando **MongoDB Atlas** (versão gratuita).
+
+2. **Frontend**:
+
+   - Utilize **AWS S3** para hospedar o frontend como um site estático:
+     1. Compile o frontend com `ng build --prod`.
+     2. Faça o upload dos arquivos gerados para um bucket S3 configurado para hospedagem de site estático.
+   - Distribua o conteúdo usando **AWS CloudFront** (50 GB gratuitos por mês no primeiro ano).
+
+3. **Automatização**:
+
+   - Configure pipelines no **AWS CodePipeline** para automatizar o deploy do backend e frontend, monitorando os repositórios no GitHub e executando o deploy a cada novo commit.
+
+4. **Monitoramento**:
+
+   - Verifique o sucesso do deploy acessando o DNS público da instância EC2 e utilize o console da AWS para monitorar o status do deploy.
+
+   Fonte: [tutorial oficial da AWS sobre como fazer deploy de uma aplicação](https://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-windows-deploy-application.html).
+
+<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+
 <!-- CONTACT -->
 
 ## Contato
